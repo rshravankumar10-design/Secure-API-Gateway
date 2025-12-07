@@ -1,5 +1,5 @@
 {
   "name": "Sentinel API Gateway",
-  "description": "A secure API gateway simulation with rate limiting, JWT authentication, IP-based blocking, and real-time traffic analytics.",
+  "description": "A secure API gateway with rate limiting, JWT authentication, IP-based blocking, and real-time traffic analytics.",
   "requestFramePermissions": []
 }

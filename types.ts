@@ -6,9 +6,9 @@ export enum SecurityLevel {
 
 export interface GatewayConfig {
   rateLimitEnabled: boolean;
-  rateLimitMax: number;
+  rateLimitMax: number; // requests per minute
   jwtRequired: boolean;
-  reverseAttackEnabled: boolean;
+  reverseAttackEnabled: boolean; // Simulates active countermeasures
   securityLevel: SecurityLevel;
 }
 
@@ -30,10 +30,10 @@ export interface LogEntry {
   timestamp: number;
   method: string;
   endpoint: string;
-  status: number;
-  duration: number;
+  status: number; // HTTP status
+  duration: number; // ms
   clientIp: string;
-  username?: string;
+  username?: string; // Track who did it
   actionTaken: 'ALLOWED' | 'BLOCKED' | 'REDIRECTED';
   threatDetected?: string;
   details: string;
@@ -47,12 +47,13 @@ export interface GatewayStats {
   globalBans: number;
 }
 
+
 export interface ClientProfile {
   username: string;
   ip: string;
   loginCount: number;
   lastActive: number;
-  riskScore: number;
+  riskScore: number; // 0-100
   status: 'ACTIVE' | 'FLAGGED' | 'BANNED';
   activityLog: { action: string; timestamp: number }[];
 }
