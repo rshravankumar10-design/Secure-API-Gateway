@@ -93,8 +93,15 @@ export const Settings: React.FC<SettingsProps> = ({ config, setConfig }) => {
       />
 
       <Toggle 
+        label="AI Threat Detection" 
+        description="Use AI to analyze payloads for SQL injection, XSS, command injection, and anomalies."
+        active={config.aiThreatDetection}
+        onChange={(v: boolean) => updateConfig('aiThreatDetection', v)}
+      />
+
+      <Toggle 
         label="Active Countermeasures" 
-        description="Enable 'Reverse Attack' protocol (Simulation only)."
+        description="Enable 'Reverse Attack' protocol to send honeypot responses to attackers."
         active={config.reverseAttackEnabled}
         onChange={(v: boolean) => updateConfig('reverseAttackEnabled', v)}
       />

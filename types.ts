@@ -8,7 +8,8 @@ export interface GatewayConfig {
   rateLimitEnabled: boolean;
   rateLimitMax: number; // requests per minute
   jwtRequired: boolean;
-  reverseAttackEnabled: boolean; // Simulates active countermeasures
+  aiThreatDetection: boolean; // AI-powered threat analysis
+  reverseAttackEnabled: boolean; // Simulate reverse attack countermeasures
   securityLevel: SecurityLevel;
 }
 
@@ -34,9 +35,20 @@ export interface LogEntry {
   duration: number; // ms
   clientIp: string;
   username?: string; // Track who did it
-  actionTaken: 'ALLOWED' | 'BLOCKED' | 'REDIRECTED';
+  actionTaken: 'ALLOWED' | 'BLOCKED' | 'REDIRECTED' | 'REVERSE_ATTACK';
   threatDetected?: string;
   details: string;
+  aiAnalysis?: AIAnalysisResult;
+}
+
+export interface AIAnalysisResult {
+  isSafe: boolean;
+  threatType?: 'SQL_INJECTION' | 'XSS' | 'COMMAND_INJECTION' | 'XXE' | 'PATH_TRAVERSAL' | 'ANOMALY' | null;
+  confidenceScore: number; // 0-100
+  explanation: string;
+  suggestedAction: 'ALLOW' | 'BLOCK' | 'REVERSE_ATTACK';
+  detectedPatterns: string[];
+  reverseAttackPayload?: string; // Counter-attack payload for reverse attack mode
 }
 
 export interface GatewayStats {
@@ -46,7 +58,6 @@ export interface GatewayStats {
   activeThreats: number;
   globalBans: number;
 }
-
 
 export interface ClientProfile {
   username: string;
